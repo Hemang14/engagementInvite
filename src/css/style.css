@@ -295,8 +295,11 @@ body {
    made their on-screen position drift with the page's total content
    height — chasing that with margin kept breaking again as text was
    added/moved. They're inpainted out of bg_clean2.jpg now and shown
-   instead as a normal flow image (.ec-rings, below), so this rule no
-   longer needs special-casing. */
+   instead as a normal flow image (.ec-rings, below). This second rule
+   still gets a tighter bottom gap than the default, to sit closer to them. */
+.ec .ec-rule:nth-of-type(2) {
+  margin-bottom: clamp(6px, 1.2vh, 10px);
+}
 
 .ec-rule::before,
 .ec-rule::after {
