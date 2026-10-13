@@ -24,11 +24,20 @@ body {
   padding: clamp(28px, 7vh, 56px) 24px;
 }
 
+.ec-ganesh {
+  width: clamp(64px, 16vw, 88px);
+  height: auto;
+  margin-bottom: clamp(10px, 2.2vh, 16px);
+  filter: drop-shadow(0 2px 8px rgba(90,69,36,0.2));
+}
+
 .ec-welcome {
-  font-size: clamp(20px, 5.6vw, 30px);
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  color: var(--ink);
+  font-family: 'Mrs Saint Delafield', cursive;
+  font-size: clamp(34px, 9vw, 48px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  color: var(--gold);
   text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 
