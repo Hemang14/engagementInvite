@@ -21,13 +21,16 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: clamp(28px, 7vh, 56px) 24px;
+  padding: 14px 24px clamp(28px, 7vh, 56px);
 }
 
+/* the bg photo has its own thin decorative line a little way down from the
+   top — keep the mark small and close to the very top edge so it sits
+   above that line instead of crossing it */
 .ec-ganesh {
-  width: clamp(64px, 16vw, 88px);
+  width: clamp(48px, 11vw, 60px);
   height: auto;
-  margin-bottom: clamp(10px, 2.2vh, 16px);
+  margin-bottom: clamp(26px, 6vh, 40px);
   filter: drop-shadow(0 2px 8px rgba(90,69,36,0.2));
 }
 
