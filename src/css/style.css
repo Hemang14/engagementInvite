@@ -129,7 +129,12 @@ body {
 
 .sched {
   background: #f4ede1;
-  padding: clamp(48px, 9vh, 72px) 24px clamp(56px, 10vh, 84px);
+  /* generous bottom padding isn't just visual breathing room — the runner's
+     scroll progress is measured against the viewport's own midpoint, so it
+     needs this much extra scrollable room below the track for that
+     midpoint to actually travel the track's full length by the time the
+     page ends */
+  padding: clamp(48px, 9vh, 72px) 24px clamp(280px, 40vh, 380px);
 }
 
 .sched-title {
@@ -148,60 +153,84 @@ body {
 }
 
 .sched-list {
+  position: relative;
   max-width: 320px;
   margin: 0 auto;
+  padding: 0 4px;
+}
+
+/* the dashed line the runner rides along, same idea as the save-the-date
+   card's celebrations timeline: one continuous track behind all the rows */
+.sched-track {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  border-left: 1px dashed var(--gold);
+  opacity: 0.55;
+  transform: translateX(-50%);
+}
+
+/* a small gold token that tracks scroll position along the track,
+   via src/js/script.js (same technique as the wedding card's timeline-runner) */
+.sched-runner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff9ec 0%, #e9dcc0 60%, #c9a35c 100%);
+  box-shadow: 0 3px 10px rgba(90,69,36,0.35), 0 0 0 3px #f4ede1;
+  will-change: transform, top;
 }
 
 .sched-row {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 34px 1fr;
   align-items: center;
   column-gap: clamp(14px, 4vw, 22px);
+  padding: 22px 0;
 }
+
+.sched-row:first-child { padding-top: 6px; }
+.sched-row:last-child { padding-bottom: 6px; }
+
+.sched-side-left { text-align: right; }
+.sched-side-right { text-align: left; }
 
 .sched-time {
   font-size: clamp(16px, 4.2vw, 19px);
   letter-spacing: 0.04em;
-  text-align: right;
   color: var(--ink);
   opacity: 0.9;
+}
+
+.sched-addr {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
+  margin-top: 4px;
 }
 
 .sched-name {
   font-size: clamp(16px, 4.2vw, 19px);
   letter-spacing: 0.04em;
-  text-align: left;
   color: var(--ink);
   opacity: 0.9;
-}
-
-.sched-line {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-self: stretch;
-  width: 100%;
-}
-
-.sched-line::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: -30px;
-  left: 50%;
-  width: 0;
-  border-left: 1px dashed var(--gold);
-  opacity: 0.6;
-}
-
-.sched-row:last-child .sched-line::before,
-.sched-line-last::before {
-  bottom: 50%;
 }
 
 .sched-dot {
   position: relative;
   z-index: 1;
+  justify-self: center;
   flex-shrink: 0;
   width: 9px;
   height: 9px;
@@ -211,6 +240,7 @@ body {
 }
 
 .sched-dot-marked {
+  justify-self: center;
   flex-shrink: 0;
   width: 30px;
   height: 30px;
@@ -224,5 +254,11 @@ body {
   box-shadow: 0 2px 6px rgba(90,40,30,0.35), 0 0 0 4px #f4ede1;
 }
 
-.sched-row { row-gap: 30px; }
-.sched-row + .sched-row { margin-top: 30px; }
+.sched-closing {
+  text-align: center;
+  font-family: 'Mrs Saint Delafield', cursive;
+  font-size: clamp(22px, 6vw, 27px);
+  color: var(--gold);
+  opacity: 0.85;
+  margin-top: clamp(50px, 9vh, 76px);
+}

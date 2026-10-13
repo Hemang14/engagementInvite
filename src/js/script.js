@@ -26,3 +26,42 @@
     setInterval(tick, 1000);
   }
 })();
+
+/* ---- Schedule runner: rides the dashed line, tracking scroll position ----
+   same technique as the wedding card's timeline-runner */
+(function () {
+  const track = document.getElementById('sched-track');
+  const runner = document.getElementById('sched-runner');
+  if (!track || !runner) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const rect = track.getBoundingClientRect();
+    const trackHeight = rect.height;
+    if (trackHeight <= 0) return;
+
+    const viewportMid = window.innerHeight / 2;
+    let progress = (viewportMid - rect.top) / trackHeight;
+    progress = Math.max(0, Math.min(1, progress));
+
+    runner.style.top = (track.offsetTop + progress * trackHeight) + 'px';
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  if (reduceMotion) {
+    runner.style.top = '50%';
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('load', update);
+    update();
+  }
+})();
