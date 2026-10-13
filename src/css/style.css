@@ -221,14 +221,27 @@ body {
   text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 
+/* a slow gold shine sweeping across "Dishakkshi" and "Kartikay" only —
+   same shimmer technique as the main wedding card's .name headline, a
+   moving gradient painted through the text via background-clip */
 .ec-names {
   font-family: 'Mrs Saint Delafield', cursive;
   font-size: clamp(30px, 8vw, 40px);
   font-weight: 400;
   line-height: 1.25;
-  color: var(--gold);
   margin-top: clamp(10px, 2vh, 16px);
   text-shadow: 0 1px 10px rgba(255,255,255,0.65);
+  background: linear-gradient(100deg, var(--gold) 40%, #fff3d6 50%, var(--gold) 60%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: ec-shimmer 6.5s linear infinite;
+}
+
+@keyframes ec-shimmer {
+  to { background-position: -220% 0; }
 }
 
 .ec-names-with {
@@ -236,9 +249,16 @@ body {
   font-family: 'Mrs Saint Delafield', cursive;
   font-size: clamp(16px, 4.2vw, 20px);
   letter-spacing: 0.02em;
+  /* explicitly reset both, since color/-webkit-text-fill-color otherwise
+     inherit the transparent shimmer fill from .ec-names above */
   color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
   opacity: 0.8;
   margin: -6px 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ec-names { animation: none; }
 }
 
 /* a plain rule-and-heart divider, same family resemblance as the other
