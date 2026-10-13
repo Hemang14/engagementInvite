@@ -16,7 +16,13 @@ body {
   position: relative;
   min-height: 100dvh;
   width: 100%;
-  background: url('../../resources/images/bg_clean.jpg') center top / cover no-repeat, #efe8d9;
+  /* width-locked sizing, not "cover": .ec's height grows with the content
+     (min-height is a floor, not a cap), and "cover" rescales against that
+     height, so the photo kept zooming in further every time text was
+     added. Locking to the box's width and letting height follow the
+     photo's own aspect ratio keeps the scale constant; any run-off below
+     the photo blends into the near-identical cream fallback color. */
+  background: url('../../resources/images/bg_clean.jpg') center top / 100% auto no-repeat, #d3cabd;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +57,6 @@ body {
   font-weight: 400;
   color: var(--gold);
   margin-top: clamp(10px, 2vh, 16px);
-  margin-bottom: clamp(22px, 4.4vh, 34px);
   text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 
