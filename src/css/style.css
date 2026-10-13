@@ -98,6 +98,7 @@ body {
   justify-content: center;
   align-items: baseline;
   gap: 10px;
+  margin-top: clamp(130px, 24vh, 190px);
   margin-bottom: clamp(24px, 6vh, 44px);
 }
 
