@@ -306,6 +306,22 @@ body {
   margin-top: clamp(8px, 1.6vh, 12px);
 }
 
+.ec-map-link {
+  display: inline-block;
+  margin-top: clamp(6px, 1.2vh, 10px);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(90,69,36,0.4);
+}
+
+.ec-map-link:active { opacity: 1; }
+
 .ec-countdown {
   display: flex;
   justify-content: center;
