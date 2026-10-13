@@ -93,18 +93,6 @@ body {
   margin-top: clamp(8px, 1.6vh, 12px);
 }
 
-.ec-mono {
-  margin: clamp(26px, 5.4vh, 42px) 0 0;
-  width: clamp(190px, 46vw, 260px);
-  filter: drop-shadow(0 4px 14px rgba(90,69,36,0.25));
-}
-
-.ec-mono img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .ec-countdown {
   display: flex;
   justify-content: center;
