@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="src/css/style.css?v=5">
+<link rel="stylesheet" href="src/css/style.css?v=7">
 </head>
 <body>
 
@@ -51,12 +51,56 @@
 
     <a class="ei-venue ei-seq ei-seq-5" href="https://maps.app.goo.gl/ysgHqMdZNkK6nL4c6" target="_blank" rel="noopener">IIDM Resort, Lucknow</a>
     <div class="ei-rule ei-rule-sm ei-seq ei-seq-6"></div>
-    <p class="ei-rsvp ei-seq ei-seq-6">Please RSVP by 15 November 2026</p>
+    <button type="button" class="ei-rsvp ei-seq ei-seq-6" id="ei-rsvp-trigger">Please RSVP by 15 November 2026</button>
 
     <p class="ei-sign ei-seq ei-seq-7">With love, D &amp; K</p>
   </div>
 </main>
 
-<script src="src/js/script.js?v=3"></script>
+<div class="ei-modal" id="ei-rsvp-modal" aria-hidden="true">
+  <div class="ei-modal-backdrop" id="ei-rsvp-backdrop"></div>
+
+  <div class="ei-modal-card" role="dialog" aria-modal="true" aria-labelledby="ei-modal-title">
+    <button type="button" class="ei-modal-close" id="ei-rsvp-close" aria-label="Close">&times;</button>
+
+    <p class="ei-modal-kicker">Engagement Dinner</p>
+    <h2 class="ei-modal-title" id="ei-modal-title">RSVP</h2>
+    <p class="ei-modal-sub">Friday 11 December &middot; 8 PM<br>IIDM Resort, Lucknow</p>
+
+    <form id="ei-rsvp-form" action="https://docs.google.com/forms/d/e/1FAIpQLScn9F1FWv582Qg_WsKpKcw3hjnKeaSPyMgoDP7KKhUJHLXV9A/formResponse" method="POST" target="ei-rsvp-frame">
+      <!-- only one date on this card, so the event is prefilled rather than asked -->
+      <input type="hidden" name="entry.1524924910" value="Sangeet: 11th evening">
+
+      <label class="ei-f-label" for="ei-f-name">Your name</label>
+      <input class="ei-f-input" id="ei-f-name" type="text" name="entry.1731653820" required placeholder="As we should announce you">
+
+      <label class="ei-f-label" for="ei-f-contact">Phone / WhatsApp</label>
+      <input class="ei-f-input" id="ei-f-contact" type="text" name="entry.89862364" required placeholder="So we can keep you updated">
+
+      <p class="ei-f-label">Will you join us?</p>
+      <div class="ei-pills">
+        <label class="ei-pill"><input type="radio" name="entry.707843021" value="Yesss, Joyfully! :)" required><span>Yes, joyfully!</span></label>
+        <label class="ei-pill"><input type="radio" name="entry.707843021" value="Sadly, can't make it :/"><span>Sadly, can't make it</span></label>
+      </div>
+
+      <label class="ei-f-label" for="ei-f-count">Number of guests (including you)</label>
+      <input class="ei-f-input" id="ei-f-count" type="number" name="entry.190365657" min="1" max="10" value="1">
+
+      <label class="ei-f-label" for="ei-f-note">A note for us <em>(optional)</em></label>
+      <textarea class="ei-f-input" id="ei-f-note" name="entry.2025142271" rows="2" placeholder="Anything at all…"></textarea>
+
+      <button class="ei-f-submit" type="submit">Send My RSVP</button>
+    </form>
+
+    <div class="ei-modal-thanks" id="ei-modal-thanks" hidden>
+      <p class="ei-modal-thanks-script">Thank You</p>
+      <p>We're so glad you'll be part of our evening. See you on the 11th!</p>
+    </div>
+
+    <iframe name="ei-rsvp-frame" id="ei-rsvp-frame" title="rsvp" tabindex="-1"></iframe>
+  </div>
+</div>
+
+<script src="src/js/script.js?v=4"></script>
 </body>
 </html>

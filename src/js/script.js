@@ -106,4 +106,59 @@
       }
     });
   }
+
+  // ---------- RSVP pop-up ----------
+
+  const rsvpTrigger = document.getElementById('ei-rsvp-trigger');
+  const rsvpModal = document.getElementById('ei-rsvp-modal');
+  const rsvpBackdrop = document.getElementById('ei-rsvp-backdrop');
+  const rsvpClose = document.getElementById('ei-rsvp-close');
+  const rsvpForm = document.getElementById('ei-rsvp-form');
+  const rsvpThanks = document.getElementById('ei-modal-thanks');
+
+  function openRsvp() {
+    if (!rsvpModal) return;
+    rsvpModal.classList.add('ei-open');
+    rsvpModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeRsvp() {
+    if (!rsvpModal) return;
+    rsvpModal.classList.remove('ei-open');
+    rsvpModal.setAttribute('aria-hidden', 'true');
+  }
+
+  if (rsvpTrigger) rsvpTrigger.addEventListener('click', openRsvp);
+  if (rsvpBackdrop) rsvpBackdrop.addEventListener('click', closeRsvp);
+  if (rsvpClose) rsvpClose.addEventListener('click', closeRsvp);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeRsvp();
+  });
+
+  if (rsvpForm && rsvpThanks) {
+    rsvpForm.addEventListener('submit', () => {
+      setTimeout(() => {
+        rsvpForm.hidden = true;
+        rsvpThanks.hidden = false;
+      }, 400);
+    });
+  }
+
+  // guest count: 0 is only offered once someone says they can't make it
+  const countInput = document.getElementById('ei-f-count');
+  const attendRadios = rsvpForm ? rsvpForm.querySelectorAll('input[name="entry.707843021"]') : [];
+
+  attendRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (!countInput || !radio.checked) return;
+      const declining = radio.value.startsWith('Sadly');
+      if (declining) {
+        countInput.min = '0';
+        countInput.value = '0';
+      } else {
+        countInput.min = '1';
+        if (Number(countInput.value) < 1) countInput.value = '1';
+      }
+    });
+  });
 })();

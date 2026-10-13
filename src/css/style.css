@@ -257,13 +257,25 @@ body {
 .ei-venue:active { opacity: 0.7; }
 
 .ei-rsvp {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
   font-size: clamp(13px, 3.6vw, 15px);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-style: italic;
   color: var(--gold-soft);
   opacity: 0.85;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(230,207,150,0.4);
 }
+
+.ei-rsvp:active { opacity: 0.65; }
 
 .ei-sign {
   font-family: 'Mrs Saint Delafield', cursive;
@@ -289,3 +301,190 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .ei-seq { transition: none; opacity: 1; filter: none; }
 }
+
+/* ---------- RSVP pop-up ---------- */
+
+.ei-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.ei-modal.ei-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.ei-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,6,0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.ei-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  padding: 30px 24px 26px;
+  border-radius: 14px;
+  border: 1px solid rgba(230,207,150,0.35);
+  background: rgba(16,15,14,0.68);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  text-align: center;
+  transform: translateY(14px) scale(0.97);
+  transition: transform 0.3s ease;
+}
+
+.ei-modal.ei-open .ei-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.ei-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(230,207,150,0.3);
+  background: rgba(255,255,255,0.04);
+  color: var(--gold-soft);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ei-modal-kicker {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  opacity: 0.8;
+}
+
+.ei-modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  margin: 4px 0 10px;
+  color: var(--cream);
+}
+
+.ei-modal-sub {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: var(--cream);
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+#ei-rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+#ei-rsvp-form[hidden] { display: none; }
+
+.ei-f-label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  opacity: 0.85;
+  margin-bottom: -4px;
+}
+
+.ei-f-label em { text-transform: none; font-style: italic; opacity: 0.8; }
+
+.ei-f-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--cream);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(230,207,150,0.3);
+  border-radius: 8px;
+  padding: 9px 11px;
+  resize: vertical;
+}
+
+.ei-f-input::placeholder { color: rgba(243,236,221,0.4); }
+.ei-f-input:focus { outline: none; border-color: var(--gold); }
+
+.ei-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ei-pill input { position: absolute; opacity: 0; }
+
+.ei-pill span {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(230,207,150,0.35);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.ei-pill input:checked + span {
+  background: var(--gold-soft);
+  border-color: var(--gold-soft);
+  color: #1a1408;
+}
+
+.ei-pill input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.ei-f-submit {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  color: #1a1408;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.ei-f-submit:active { opacity: 0.85; }
+
+.ei-modal-thanks {
+  padding: 10px 4px 2px;
+}
+
+.ei-modal-thanks-script {
+  font-family: 'Mrs Saint Delafield', cursive;
+  font-size: 32px;
+  color: var(--gold-soft);
+  margin-bottom: 8px;
+}
+
+.ei-modal-thanks p:not(.ei-modal-thanks-script) {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cream);
+  opacity: 0.9;
+}
+
+#ei-rsvp-frame { display: none; }
