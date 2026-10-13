@@ -16,7 +16,7 @@ body {
   position: relative;
   min-height: 100dvh;
   width: 100%;
-  background: url('../../resources/images/bg.jpg') center top / cover no-repeat, #efe8d9;
+  background: url('../../resources/images/bg_clean.jpg') center top / cover no-repeat, #efe8d9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,9 +45,57 @@ body {
   text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 
+.ec-names {
+  font-family: 'Mrs Saint Delafield', cursive;
+  font-size: clamp(30px, 8vw, 40px);
+  font-weight: 400;
+  color: var(--gold);
+  margin-top: clamp(10px, 2vh, 16px);
+  margin-bottom: clamp(22px, 4.4vh, 34px);
+  text-shadow: 0 1px 10px rgba(255,255,255,0.65);
+}
+
+/* a plain rule-and-heart divider, same family resemblance as the other
+   cards' dividers, so we aren't trying to land text on the photo's own
+   faint lines (whose position shifts as the page's content height does) */
+.ec-rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 260px;
+  margin: clamp(22px, 4.4vh, 34px) auto;
+  color: var(--gold);
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.ec-rule::before,
+.ec-rule::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.ec-date {
+  font-size: clamp(17px, 4.6vw, 21px);
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  opacity: 0.92;
+}
+
+.ec-venue {
+  font-size: clamp(14px, 3.8vw, 16px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.95;
+  margin-top: clamp(8px, 1.6vh, 12px);
+}
+
 .ec-mono {
-  margin-top: auto;
-  margin-bottom: clamp(32px, 9vh, 72px);
+  margin: clamp(26px, 5.4vh, 42px) 0 0;
   width: clamp(190px, 46vw, 260px);
   filter: drop-shadow(0 4px 14px rgba(90,69,36,0.25));
 }
@@ -57,3 +105,34 @@ body {
   width: 100%;
   height: auto;
 }
+
+.ec-countdown {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: clamp(24px, 6vh, 44px);
+}
+
+.ec-cd-cell { min-width: 48px; }
+
+.ec-cd-cell span {
+  display: block;
+  font-size: clamp(24px, 6.6vw, 30px);
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+}
+
+.ec-cd-cell label {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+.ec-cd-sep { color: var(--gold); font-size: 18px; transform: translateY(-6px); }
