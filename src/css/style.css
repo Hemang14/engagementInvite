@@ -56,7 +56,7 @@ body {
 }
 
 .env-ring-bg {
-  width: clamp(110px, 30vw, 150px);
+  width: clamp(170px, 46vw, 230px);
   height: auto;
   margin-bottom: clamp(14px, 2.8vh, 22px);
   opacity: 0.92;
