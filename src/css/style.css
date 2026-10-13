@@ -208,6 +208,9 @@ body {
   align-items: center;
   column-gap: clamp(14px, 4vw, 22px);
   padding: 22px 0;
+  /* opacity itself is set per-row by script.js as the runner moves past —
+     this just smooths that change into a fade instead of a jump */
+  transition: opacity 0.45s ease;
 }
 
 .sched-row:first-child { padding-top: 6px; }

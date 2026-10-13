@@ -28,14 +28,20 @@
 })();
 
 /* ---- Schedule runner: rides the dashed line, tracking scroll position ----
-   same technique as the wedding card's timeline-runner */
+   same positioning technique as the wedding card's timeline-runner, plus a
+   spotlight pass — each row fades up to full strength as the runner reaches
+   it and dims again once it moves on, rather than just revealing once */
 (function () {
   const track = document.getElementById('sched-track');
   const runner = document.getElementById('sched-runner');
-  if (!track || !runner) return;
+  const rows = Array.prototype.slice.call(document.querySelectorAll('.sched-row'));
+  if (!track || !runner || !rows.length) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let ticking = false;
+
+  const DIM = 0.3;      // resting opacity for a row the runner isn't near
+  const FOCUS_SPAN = 1 / (rows.length - 1) * 0.85; // how close counts as "in focus"
 
   function update() {
     ticking = false;
@@ -48,6 +54,14 @@
     progress = Math.max(0, Math.min(1, progress));
 
     runner.style.top = (track.offsetTop + progress * trackHeight) + 'px';
+
+    rows.forEach((row, i) => {
+      const rowFraction = rows.length > 1 ? i / (rows.length - 1) : 0;
+      const dist = Math.abs(progress - rowFraction);
+      const t = Math.max(0, 1 - dist / FOCUS_SPAN); // 1 at the runner, 0 once far away
+      const opacity = DIM + (1 - DIM) * t;
+      row.style.opacity = opacity.toFixed(3);
+    });
   }
 
   function onScroll() {
@@ -58,6 +72,7 @@
 
   if (reduceMotion) {
     runner.style.top = '50%';
+    rows.forEach(row => { row.style.opacity = '1'; });
   } else {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
