@@ -14,7 +14,7 @@
   // ---------- Music ----------
   const music = document.getElementById('ec-music');
   const MUSIC_START = 15;
-  const MUSIC_VOLUME = 0.2; // fixed relative level, independent of the device's own volume
+  const MUSIC_VOLUME = 0.1; // fixed relative level, independent of the device's own volume
   if (music) music.volume = MUSIC_VOLUME;
   let musicWanted = false;
   let musicStartSet = false;
