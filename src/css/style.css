@@ -13,14 +13,16 @@ body {
 }
 
 /* ---------- Envelope (opening screen) ----------
-   same structure/behaviour as the main wedding card's envelope (seal +
-   tap-to-open), re-coloured for this page's light cream/gold palette
-   instead of that card's dark wine one; no camera or photo-strip here */
+   copied from the KDWeddingInvite mainline's envelope — same dark-wine
+   background gradient, fade-up, gold seal and tap-to-open button/animation
+   — with the camera and photo-strip print-out left out entirely; the seal
+   shows the Ganesha mark in place of the K&D monogram photo this page
+   doesn't have */
 #envelope {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: radial-gradient(120% 90% at 50% 0%, #f6efe0 0%, #ecdfc4 48%, #ddc9a0 100%);
+  background: radial-gradient(120% 90% at 50% 0%, #5c1a2b 0%, #4a1220 45%, #310a12 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,12 +39,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6vh;
+  gap: 2.5vh;
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 14vh 24px 10vh;
+  padding: 8vh 24px 6vh;
   animation: env-fadeUp 1.2s ease-out both;
 }
 
@@ -54,44 +56,42 @@ body {
 }
 
 .env-kicker {
-  color: var(--ink);
-  font-size: clamp(12px, 3.5vw, 14px);
+  color: #f1dda8;
+  font-size: clamp(11px, 3.2vw, 13px);
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  opacity: 0.75;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .env-names {
-  color: var(--gold);
-  font-family: 'Mrs Saint Delafield', cursive;
-  font-size: clamp(42px, 13vw, 56px);
+  color: #f6efe3;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(40px, 13vw, 54px);
   letter-spacing: 0.01em;
-  line-height: 1.12;
+  line-height: 1.08;
   text-align: center;
-  text-shadow: 0 1px 10px rgba(255,255,255,0.65);
 }
 
 .env-names span {
   display: block;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  color: var(--ink);
-  opacity: 0.8;
-  font-size: 0.4em;
+  color: #c9a35c;
+  font-size: 0.56em;
   letter-spacing: 0.16em;
   line-height: 1.7;
 }
 
 #seal {
-  width: 112px;
-  height: 112px;
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  background: radial-gradient(circle at 35% 30%, #fff9ec 0%, #f0e3c4 42%, #d9c190 78%, #c9a35c 100%);
-  box-shadow: 0 6px 24px rgba(90,69,36,0.3), 0 0 0 6px rgba(179,144,79,0.18);
+  color: #310a12;
+  background: radial-gradient(circle at 35% 30%, #e9cf92 0%, #c9a35c 42%, #9a7434 78%, #7c5c26 100%);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 6px rgba(201,163,92,0.18);
   display: grid;
   place-items: center;
   animation: env-pulse 2.4s ease-in-out infinite;
@@ -101,8 +101,8 @@ body {
 #seal:active { transform: scale(0.92); }
 
 .seal-logo {
-  width: 64%;
-  height: 64%;
+  width: 76%;
+  height: 76%;
   object-fit: contain;
   pointer-events: none;
 }
@@ -113,10 +113,10 @@ body {
   background: none;
   border: none;
   font-family: inherit;
-  color: var(--ink);
+  color: #e6cf96;
   font-style: italic;
   font-size: 16px;
-  opacity: 0.75;
+  opacity: 0.85;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -124,8 +124,8 @@ body {
 .env-hint:active { opacity: 1; }
 
 @keyframes env-pulse {
-  0%, 100% { box-shadow: 0 6px 24px rgba(90,69,36,0.3), 0 0 0 6px rgba(179,144,79,0.18); }
-  50% { box-shadow: 0 6px 24px rgba(90,69,36,0.3), 0 0 0 16px rgba(179,144,79,0.04); }
+  0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 6px rgba(201,163,92,0.18); }
+  50% { box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 16px rgba(201,163,92,0.04); }
 }
 
 @keyframes env-fadeUp {
@@ -322,12 +322,12 @@ body {
 
 .sched {
   background: #f4ede1;
-  /* generous bottom padding isn't just visual breathing room — the runner's
-     scroll progress is measured against the viewport's own midpoint, so it
-     needs this much extra scrollable room below the track for that
-     midpoint to actually travel the track's full length by the time the
-     page ends */
-  padding: clamp(48px, 9vh, 72px) 24px clamp(280px, 40vh, 380px);
+  /* the runner's progress is now measured against the viewport's bottom
+     edge rather than its midpoint (see script.js), so it no longer needs a
+     deep well of empty padding below the track to finish its run — the
+     closing line is enough room on its own, and the footer can follow
+     right after */
+  padding: clamp(48px, 9vh, 72px) 24px clamp(56px, 10vh, 84px);
 }
 
 .sched-title {
@@ -450,7 +450,10 @@ body {
    same photo as the hero up top (not the dark-green sign-off the main
    wedding card uses), carrying the same text content as that footer */
 .ec-foot {
-  background: url('../../resources/images/bg_clean.jpg') center bottom / cover no-repeat, #d3cabd;
+  /* same photo as the hero, but anchored to its plain upper stretch (the
+     same crop that sits behind the Ganesha mark and welcome line up top)
+     instead of the busier rings/envelope area lower in the frame */
+  background: url('../../resources/images/bg_clean.jpg') center top / cover no-repeat, #d3cabd;
   padding: clamp(52px, 10vh, 80px) 24px;
   text-align: center;
 }

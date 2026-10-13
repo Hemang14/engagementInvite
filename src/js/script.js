@@ -111,8 +111,11 @@
     const trackHeight = rect.height;
     if (trackHeight <= 0) return;
 
-    const viewportMid = window.innerHeight / 2;
-    let progress = (viewportMid - rect.top) / trackHeight;
+    // anchored near the bottom of the viewport (not its midpoint) so the
+    // runner finishes its run without needing a deep well of empty padding
+    // below the track just to give that anchor room to reach it
+    const anchor = window.innerHeight * 0.85;
+    let progress = (anchor - rect.top) / trackHeight;
     progress = Math.max(0, Math.min(1, progress));
 
     runner.style.top = (track.offsetTop + progress * trackHeight) + 'px';
