@@ -16,13 +16,7 @@ body {
   position: relative;
   min-height: 100dvh;
   width: 100%;
-  /* width-locked sizing, not "cover": .ec's height grows with the content
-     (min-height is a floor, not a cap), and "cover" rescales against that
-     height, so the photo kept zooming in further every time text was
-     added. Locking to the box's width and letting height follow the
-     photo's own aspect ratio keeps the scale constant; any run-off below
-     the photo blends into the near-identical cream fallback color. */
-  background: url('../../resources/images/bg_clean.jpg') center top / 100% auto no-repeat, #d3cabd;
+  background: url('../../resources/images/bg_clean.jpg') center top / cover no-repeat, #d3cabd;
   display: flex;
   flex-direction: column;
   align-items: center;
