@@ -3,6 +3,22 @@
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const petals = document.getElementById('ei-petals');
+  if (petals && !reduceMotion) {
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement('span');
+      p.className = 'ei-petal';
+      const size = 4 + Math.random() * 4;
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = (7 + Math.random() * 7) + 's';
+      p.style.animationDelay = -Math.random() * 12 + 's';
+      p.style.opacity = 0.3 + Math.random() * 0.4;
+      petals.appendChild(p);
+    }
+  }
+
   const groups = [1, 2, 3, 4, 5, 6, 7].map(n =>
     Array.from(document.querySelectorAll('.ei-seq-' + n))
   );

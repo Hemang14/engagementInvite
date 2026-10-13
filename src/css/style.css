@@ -124,6 +124,47 @@ body {
   100% { background-position: 160% 160%; }
 }
 
+/* ---------- Falling petals, same pattern as the other cards ---------- */
+
+.ei-petals {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.ei-petal {
+  position: absolute;
+  top: -24px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50% 0 50% 0;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  box-shadow: 0 0 4px rgba(201,163,92,0.5);
+  animation: eiPetalFall linear infinite;
+  will-change: transform;
+}
+
+@keyframes eiPetalFall {
+  0% { transform: translateY(-24px) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(46vh) translateX(22px) rotate(220deg); }
+  90% { opacity: 1; }
+  100% { transform: translateY(102vh) translateX(-14px) rotate(460deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ei-petals { display: none; }
+}
+
 .ei-rule {
   width: 92px;
   height: 1px;
