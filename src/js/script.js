@@ -1,3 +1,65 @@
+// Envelope — tap the seal (or "Tap to open") to reveal the card beneath.
+// Same open/close behaviour as the main wedding card's envelope, minus the
+// camera and music bits this page doesn't use.
+(function () {
+  const envelope = document.getElementById('envelope');
+  const card = document.getElementById('card');
+  const seal = document.getElementById('seal');
+  const envHint = document.getElementById('env-hint');
+  if (!envelope || !card || !seal) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // a shared #open link skips straight to the card
+  if (location.hash === '#open') {
+    envelope.remove();
+    card.setAttribute('aria-hidden', 'false');
+    return;
+  }
+
+  let opened = false;
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    card.setAttribute('aria-hidden', 'false');
+    envelope.classList.add('open');
+    setTimeout(() => envelope.remove(), reduceMotion ? 0 : 1200);
+  }
+
+  seal.addEventListener('click', openEnvelope);
+  if (envHint) envHint.addEventListener('click', openEnvelope);
+})();
+
+// Welcome page — petal shower drifting down over the hero.
+(function () {
+  const field = document.getElementById('petals');
+  if (!field) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const COUNT = 16;
+  for (let i = 0; i < COUNT; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    const size = 7 + Math.random() * 7;           // 7-14px
+    const left = Math.random() * 100;              // 0-100%
+    const duration = 9 + Math.random() * 7;        // 9-16s
+    const delay = -(Math.random() * (9 + 7));      // negative so the field starts already mid-fall
+    const sway = (Math.random() * 60 - 30).toFixed(0) + 'px';
+    const rot = Math.round(Math.random() * 360) + 'deg';
+    const opacity = (0.55 + Math.random() * 0.35).toFixed(2);
+
+    p.style.setProperty('--psize', size.toFixed(1) + 'px');
+    p.style.setProperty('--px', left.toFixed(1) + '%');
+    p.style.setProperty('--pdur', duration.toFixed(1) + 's');
+    p.style.setProperty('--pdelay', delay.toFixed(1) + 's');
+    p.style.setProperty('--psway', sway);
+    p.style.setProperty('--prot', rot);
+    p.style.setProperty('--pop', opacity);
+
+    field.appendChild(p);
+  }
+})();
+
 // Welcome page — countdown to the ceremony date.
 
 (function () {

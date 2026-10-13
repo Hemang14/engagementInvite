@@ -10,11 +10,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="src/css/style.css?v=23">
+<link rel="stylesheet" href="src/css/style.css?v=25">
 </head>
 <body>
 
+<div id="envelope">
+  <div class="env-layout">
+    <div class="env-top">
+      <p class="env-kicker">We're Getting Engaged</p>
+      <p class="env-names">Dishakkshi <span>&amp;</span> Kartikay</p>
+    </div>
+    <button id="seal" aria-label="Open the invitation">
+      <img class="seal-logo" src="resources/images/ganesh2_cutout.png" alt="Shree Ganesha">
+    </button>
+    <button type="button" class="env-hint" id="env-hint">Tap to open</button>
+  </div>
+</div>
+
+<div id="card" aria-hidden="true">
+
 <main class="ec">
+  <div class="petals" id="petals" aria-hidden="true"></div>
   <img class="ec-ganesh" src="resources/images/ganesh2_cutout.png" alt="Shree Ganesha">
   <p class="ec-welcome">Kalpana Singh &amp; Mahendra Singh cordially invite you to the engagement ceremony of their beloved daughter</p>
 
@@ -97,7 +113,16 @@
   <p class="sched-closing">We can&rsquo;t wait to celebrate with you</p>
 </section>
 
-<script src="src/js/script.js?v=3"></script>
+<footer class="ec-foot">
+  <img class="ec-foot-ganesh" src="resources/images/ganesh2_cutout.png" alt="Shree Ganesha">
+  <p class="ec-foot-script">With love and warm regards,</p>
+  <p class="ec-foot-names">Kalpana &amp; Mahendra</p>
+  <p class="ec-foot-see">We look forward to celebrating with you</p>
+</footer>
+
+</div>
+
+<script src="src/js/script.js?v=5"></script>
 
 </body>
 </html>
