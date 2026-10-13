@@ -187,13 +187,33 @@ body {
   color: var(--cream);
 }
 
+/* the date block is a button (tap to add to calendar) and the venue is a
+   link (tap to open the map) — reset to look exactly like the plain text
+   they used to be */
+.ei-date {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ei-date:active { opacity: 0.75; }
+
 .ei-venue {
+  display: inline-block;
   font-size: clamp(16px, 4.4vw, 19px);
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--cream);
   opacity: 0.95;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+.ei-venue:active { opacity: 0.7; }
 
 .ei-rsvp {
   font-size: clamp(13px, 3.6vw, 15px);
