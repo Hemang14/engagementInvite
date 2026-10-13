@@ -1,6 +1,7 @@
 // Envelope — tap the seal (or "Tap to open") to reveal the card beneath.
-// Same open/close behaviour as the main wedding card's envelope, minus the
-// camera and music bits this page doesn't use.
+// Same open/close behaviour as the main wedding card's envelope, plus the
+// theme song: starts 15s in on open, loops, and pauses whenever the tab/app
+// is backgrounded (same pattern as the save-the-date card's music).
 (function () {
   const envelope = document.getElementById('envelope');
   const card = document.getElementById('card');
@@ -10,10 +11,41 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---------- Music ----------
+  const music = document.getElementById('ec-music');
+  const MUSIC_START = 15;
+  let musicWanted = false;
+  let musicStartSet = false;
+
+  function primeMusicStart() {
+    if (musicStartSet || !music) return;
+    if (music.duration && music.duration > MUSIC_START) {
+      try { music.currentTime = MUSIC_START; musicStartSet = true; } catch (e) {}
+    }
+  }
+  if (music) music.addEventListener('loadedmetadata', primeMusicStart);
+
+  function playMusic() {
+    if (!music) return;
+    musicWanted = true;
+    primeMusicStart();
+    music.play().catch(() => {});
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!music) return;
+    if (document.hidden) {
+      music.pause();
+    } else if (musicWanted) {
+      music.play().catch(() => {});
+    }
+  });
+
   // a shared #open link skips straight to the card
   if (location.hash === '#open') {
     envelope.remove();
     card.setAttribute('aria-hidden', 'false');
+    playMusic();
     return;
   }
 
@@ -23,6 +55,7 @@
     opened = true;
     card.setAttribute('aria-hidden', 'false');
     envelope.classList.add('open');
+    playMusic();
     setTimeout(() => envelope.remove(), reduceMotion ? 0 : 1200);
   }
 

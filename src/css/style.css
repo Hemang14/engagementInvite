@@ -55,11 +55,11 @@ body {
   text-align: center;
 }
 
-.env-ring-bg {
-  width: clamp(170px, 46vw, 230px);
+.env-ganesh {
+  width: clamp(84px, 22vw, 108px);
   height: auto;
   margin-bottom: clamp(14px, 2.8vh, 22px);
-  opacity: 0.92;
+  opacity: 0.95;
   filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
 }
 
