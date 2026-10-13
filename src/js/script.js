@@ -144,6 +144,33 @@
     });
   }
 
+  // ---------- Countdown (shown on the RSVP pop-up's thank-you state) ----------
+
+  const cdTarget = new Date('2026-12-11T20:00:00+05:30').getTime();
+  const cd = {
+    d: document.getElementById('ei-cd-d'),
+    h: document.getElementById('ei-cd-h'),
+    m: document.getElementById('ei-cd-m'),
+    s: document.getElementById('ei-cd-s')
+  };
+
+  if (cd.d && cd.h && cd.m && cd.s) {
+    const tickCountdown = () => {
+      const diff = cdTarget - Date.now();
+      if (diff <= 0) {
+        cd.d.textContent = '00'; cd.h.textContent = '00';
+        cd.m.textContent = '00'; cd.s.textContent = '00';
+        return;
+      }
+      cd.d.textContent = String(Math.floor(diff / 864e5)).padStart(2, '0');
+      cd.h.textContent = String(Math.floor(diff / 36e5) % 24).padStart(2, '0');
+      cd.m.textContent = String(Math.floor(diff / 6e4) % 60).padStart(2, '0');
+      cd.s.textContent = String(Math.floor(diff / 1e3) % 60).padStart(2, '0');
+    };
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+  }
+
   // guest count: 0 is only offered once someone says they can't make it
   const countInput = document.getElementById('ei-f-count');
   const attendRadios = rsvpForm ? rsvpForm.querySelectorAll('input[name="entry.707843021"]') : [];
