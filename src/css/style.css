@@ -338,7 +338,9 @@ body {
   display: block;
   width: clamp(190px, 52vw, 250px);
   height: auto;
-  margin: clamp(18px, 3.4vh, 28px) auto 0;
+  /* the rule above already carries its own bottom margin, so this only
+     needs a small nudge, not a second full gap stacked on top of it */
+  margin: 0 auto 0;
   filter: drop-shadow(0 6px 16px rgba(90,69,36,0.18));
 }
 
