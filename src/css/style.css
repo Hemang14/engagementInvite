@@ -55,6 +55,14 @@ body {
   text-align: center;
 }
 
+.env-ring-bg {
+  width: clamp(110px, 30vw, 150px);
+  height: auto;
+  margin-bottom: clamp(14px, 2.8vh, 22px);
+  opacity: 0.92;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
+}
+
 .env-kicker {
   color: #f1dda8;
   font-size: clamp(11px, 3.2vw, 13px);
